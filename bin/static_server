@@ -1,0 +1,33 @@
+use qbit;
+
+use QBit::StaticServer;
+
+use MIME::Types;
+
+my $PATH = `pwd`;
+chomp($PATH);
+
+my $wi = QBit::StaticServer->new();
+
+my $r = $wi->routing();
+
+my $mimetypes = MIME::Types->new();
+
+$r->get('/*url*')->to(sub {
+    my ($c, %opts) = @_;
+    
+    throw Exception::StaticServer gettext('Expected path to static') if !defined($opts{'url'}) || $opts{'url'} eq '';
+    
+    my $path = "$PATH/" . $opts{'url'};
+    
+    throw Exception::StaticServer gettext('file "%s" not found', $path) unless -e $path;
+    
+    my $mimetype = $mimetypes->mimeTypeOf($opts{'url'});
+    
+    $c->send_file(
+        content_type => $mimetype->type() . ($mimetype->isAscii() ? '; charset=UTF-8' : ''),
+        data => readfile($path, binary => $mimetype && $mimetype->isBinary())
+    );
+});
+
+$wi->run;
