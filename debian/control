@@ -2,11 +2,11 @@ Source: libqbit-staticserver-perl
 Section: perl
 Priority: extra
 Maintainer: Igor Sverdlov <igor-sverdlov@mail.ru>
-Build-Depends: debhelper (>= 8.0.0), perl, libqbit-perl, libqbit-webinterface-psgi-perl libqbit-application-perl, libqbit-webinterface-routing-perl
+Build-Depends: debhelper (>= 8.0.0), perl, libqbit-perl, libqbit-webinterface-psgi-perl libqbit-application-perl, libqbit-webinterface-routing-perl, libmime-types-perl
 Standards-Version: 3.9.4
 
 Package: libqbit-staticserver-perl
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${perl:Depends}, perl, libqbit-perl, libqbit-webinterface-psgi-perl libqbit-application-perl, libqbit-webinterface-routing-perl
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${perl:Depends}, perl, libqbit-perl, libqbit-webinterface-psgi-perl libqbit-application-perl, libqbit-webinterface-routing-perl, libmime-types-perl
 Description: Server for static files.
  Server for static files.
